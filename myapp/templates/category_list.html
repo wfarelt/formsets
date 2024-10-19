@@ -1,0 +1,21 @@
+<!-- category_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<h1>Categories</h1>
+<a class="btn btn-primary mb-3" href="{% url 'category_create' %}">Add Category</a>
+<ul class="list-group">
+    {% for category in categories %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ category.name }}
+        <span>
+            <a class="btn btn-sm btn-success" href="{% url 'add_tasks_to_category' category.id %}">Add Tasks</a>
+            <a class="btn btn-sm btn-warning" href="{% url 'category_update' category.id %}">Edit</a>
+            <a class="btn btn-sm btn-danger" href="{% url 'category_delete' category.id %}">Delete</a>
+        </span>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

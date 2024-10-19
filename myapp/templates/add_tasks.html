@@ -1,0 +1,39 @@
+<!-- templates/add_tasks.html -->
+{% extends 'base.html' %}
+
+{% block title %}Add Tasks{% endblock %}
+
+{% block content %}
+<h1>Add Tasks to {{ category.name }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ formset.management_form }}
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in formset.forms %}
+            <tr>
+                <td hidden>{{form.id}}</td>
+                <td>{{form.name}}</td>
+                <td>{{form.due_date}}</td>
+                <td>{{form.status}}</td>
+                <td>{{form.DELETE}}</td>                
+            </tr>           
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary mt-3">Save Tasks</button>
+    <a class="btn btn-secondary mt-3" href="{% url 'category_list' %}">Cancel</a>
+</form>
+{% endblock %}
+
